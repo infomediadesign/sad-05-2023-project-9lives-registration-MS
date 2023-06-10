@@ -2,7 +2,7 @@
 tags:
   - Registration
 parameters:
-  - name: user-email
+  - name: email
     in: formData
     type: string
     format: email

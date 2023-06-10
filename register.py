@@ -20,18 +20,18 @@ def home():
 def register():
     if request.method == "POST":
         
-        user_email = request.form["user-email"]
+        user_email = request.form["email"]
         password = request.form["password"]
 
         
 
-        existing_user = collection.find_one({"user-email": user_email})
+        existing_user = collection.find_one({"email": user_email})
         if existing_user:
             return "Email is already registered!"
         
         
         new_user = {
-            "user-email": user_email,
+            "email": user_email,
             "password": password
         }
 

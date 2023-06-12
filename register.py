@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from flask import Flask, request, jsonify
 from flasgger import Swagger, swag_from
+from flask_cors import CORS
 
 client = MongoClient(
     "mongodb+srv://rajat011:HxXq4k1ODpXQGjw6@dev.ylhokif.mongodb.net/?retryWrites=true&w=majority")
@@ -9,6 +10,7 @@ db = client["usersdb"]
 collection = db["login-details"]
 
 app = Flask(__name__)
+CORS(app)
 swagger = Swagger(app)
 
 

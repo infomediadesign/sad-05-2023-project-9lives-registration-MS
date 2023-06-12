@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, request, jsonify
 from flasgger import Swagger, swag_from
 
 client = MongoClient(
@@ -14,10 +14,10 @@ swagger = Swagger(app)
 
 @app.route("/")
 def home():
-    return "Welcome to the registration page!"
+    return jsonify({'message': "Welcome to the registration page!"})
 
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["POST"])
 @swag_from('swagger/register.yml')
 def register():
     if request.method == "POST":
@@ -39,12 +39,7 @@ def register():
         return jsonify({'message': 'Registration successful'}), 201
     else:
 
-        return render_template("register.html")
-
-
-@app.route("/success")
-def success():
-    return "Registration successful!"
+        return jsonify({'message': 'Registration unsuccessful'}), 400
 
 
 if __name__ == "__main__":

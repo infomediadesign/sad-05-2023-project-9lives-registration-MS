@@ -22,8 +22,10 @@ def home():
 def register():
     if request.method == "POST":
 
-        user_email = request.form["email"]
-        password = request.form["password"]
+        data = request.get_json()
+
+        user_email = data["email"]
+        password = data["password"]
 
         existing_user = collection.find_one({"email": user_email})
         if existing_user:

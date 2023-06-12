@@ -17,7 +17,7 @@ def home():
     return "Welcome to the registration page!"
 
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["POST"])
 @swag_from('swagger/register.yml')
 def register():
     if request.method == "POST":

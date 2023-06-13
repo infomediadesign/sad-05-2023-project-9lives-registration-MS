@@ -1,0 +1,41 @@
+name: DEPLOY TO DOCKERHUB FOR REGISTRATION
+
+on:
+  push:
+    branches: ["ci_kp"]
+  pull_request:
+    branches: ["ci_kp"]
+
+env:
+  DOCKER_USER: kishor97p
+  DOCKER_PASSWORD: Kspatil@97
+  DOCKER_REPO: kishor97p/sad_05_2023_project_9lives
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build and Tag Docker Image
+        run: |-
+          docker build -t ninelives-registration:1.0 .
+
+      - name: Docker Login
+        env:
+          DOCKER_USER: kishor97p
+          DOCKER_PASSWORD: Kspatil@97
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - name: Rename the tag
+        run: docker tag 1.0 kishor97p/sad_05_2023_project_9lives:ninelives-registration
+
+      - name: Push to Dockerhub
+        run: docker push kishor97p/sad_05_2023_project_9lives:ninelives-registration

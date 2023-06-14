@@ -1,0 +1,24 @@
+---
+tags:
+  - Registration
+parameters:
+  - name: email
+    in: formData
+    type: string
+    format: email
+    required: true
+  - name: password
+    in: formData
+    type: string
+    format: password
+    required: true
+responses:
+  201:
+    description: Registration successful
+  400:
+    description: Bad request
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
